@@ -19,106 +19,220 @@ create database if not exists javafxTest;
 use javafxTest;
 
 --
--- Table structure for table `films`
+-- Table structure for table `ingredient`
 --
 
-DROP TABLE IF EXISTS `films`;
+DROP TABLE IF EXISTS `ingredient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `films` (
-                         `Film_number` int NOT NULL,
-                         `Name` varchar(60) DEFAULT NULL,
-                         `Session_start` time DEFAULT NULL,
-                         `End_of_session` time DEFAULT NULL,
-                         PRIMARY KEY (`Film_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `ingredient` (
+                              `id_ingredient` int NOT NULL AUTO_INCREMENT,
+                              `name_ingredient` varchar(40) NOT NULL,
+                              `cost_ingredient` decimal(6,0) NOT NULL,
+                              `nalichie` varchar(40) NOT NULL,
+                              PRIMARY KEY (`id_ingredient`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `films`
+-- Dumping data for table `ingredient`
 --
 
-LOCK TABLES `films` WRITE;
-/*!40000 ALTER TABLE `films` DISABLE KEYS */;
-INSERT INTO `films` VALUES (1,'Зеленая миля','14:30:00','17:39:00'),(2,'Побег из Шоушенка','18:00:00','20:22:00'),(3,'Список Шиндлера','19:10:00','22:25:00'),(4,'Интерстеллар','15:40:00','18:29:00'),(5,'Бойцовский клуб','13:00:00','15:19:00'),(6,'Иван Васильевич меняет профессию','18:05:00','19:33:00'),(7,'Шрэк','12:20:00','13:50:00'),(8,'Король Лев','11:00:00','12:28:00'),(9,'Назад в будущее','16:05:00','18:01:00'),(10,'Москва слезам не верит','17:25:00','19:55:00'),(11,'Остров проклятых','19:40:00','21:58:00'),(12,'Леон','20:00:00','22:13:00'),(13,'Темный рыцарь','13:10:00','15:42:00'),(14,'...А зори здесь тихие ','15:15:00','17:55:00'),(15,'Зеленая книга','14:20:00','16:30:00'),(16,'Бриллиантовая рука','17:50:00','19:24:00'),(17,'Клаус','12:05:00','13:41:00'),(18,'Большой куш','10:00:00','11:44:00'),(19,'Гарри Поттер и Тайная комната','14:10:00','16:51:00'),(20,'Титаник','16:00:00','19:14:00'),(24,'Мрачные тени','15:00:00','16:53:00');
-/*!40000 ALTER TABLE `films` ENABLE KEYS */;
+LOCK TABLES `ingredient` WRITE;
+/*!40000 ALTER TABLE `ingredient` DISABLE KEYS */;
+INSERT INTO `ingredient` VALUES (1,'Мясо свинина 1 кг',2000,'Yes'),(2,'Мясо говядина 1 кг',3800,'Yes'),(3,'Мясо курица 1 кг',2400,'Yes'),(4,'Сосиски 10 штук',3000,'Yes'),(5,'Сыр 1 кг',1800,'Yes'),(6,'Тесто 1 кг',1500,'No'),(7,'Лук 1кг',1700,'Yes'),(8,'Огурцы 1кг',800,'Yes'),(9,'Помидоры 1кг',900,'Yes'),(10,'Майонез 10 пачек',1900,'No'),(11,'Приправа 1кг',3000,'No'),(12,'Соус острый 10 пачек',4000,'Yes'),(13,'Капуста 1кг',689,'Yes'),(14,'Яйца куриные 10 ячеек',500,'Yes'),(15,'Морковка 1 кг',600,'Yes'),(16,'Чай заварной 1 кг',790,'Yes'),(17,'Кофе 1 кг',4031,'Yes'),(18,'Молоко 10 пачек',1000,'Yes'),(19,'Сливки 10 пачек',2000,'Yes'),(20,'Сахар 1 кг',3621,'Yes'),(21,'Лаваш',2312,'Yes');
+/*!40000 ALTER TABLE `ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `films_has_halls`
+-- Table structure for table `dostavka`
 --
 
-DROP TABLE IF EXISTS `films_has_halls`;
+DROP TABLE IF EXISTS `dostavka`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `films_has_halls` (
-                                   `Film_number` int NOT NULL,
-                                   `Hall_number` int NOT NULL,
-                                   PRIMARY KEY (`Film_number`,`Hall_number`),
-                                   KEY `fk_Films_has_Halls_Halls1_idx` (`Hall_number`),
-                                   KEY `fk_Films_has_Halls_Films1_idx` (`Film_number`),
-                                   CONSTRAINT `fk_Films_has_Halls_Films1` FOREIGN KEY (`Film_number`) REFERENCES `films` (`Film_number`),
-                                   CONSTRAINT `fk_Films_has_Halls_Halls1` FOREIGN KEY (`Hall_number`) REFERENCES `halls` (`Hall_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `dostavka` (
+    `id_dostavka` int NOT NULL AUTO_INCREMENT,
+    `data_time_dostavka` datetime DEFAULT NULL,
+    `id_dish` int NOT NULL,
+    `cost_dostavka` decimal(6,0) NOT NULL,
+    PRIMARY KEY (`id_dostavka`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `films_has_halls`
+-- Dumping data for table `dostavka`
 --
 
-LOCK TABLES `films_has_halls` WRITE;
-/*!40000 ALTER TABLE `films_has_halls` DISABLE KEYS */;
-INSERT INTO `films_has_halls` VALUES (11,2),(11,3),(6,4),(19,4),(1,5),(8,5),(6,6),(20,6),(7,7),(14,7),(1,8),(3,8),(5,9),(14,11),(17,16),(3,17),(4,18),(8,18);
-/*!40000 ALTER TABLE `films_has_halls` ENABLE KEYS */;
+LOCK TABLES `dostavka` WRITE;
+/*!40000 ALTER TABLE `dostavka` DISABLE KEYS */;
+INSERT INTO `dostavka` VALUES (1,'2011-12-26 06:08:54',20,40),(2,'2012-03-14 22:35:44',3,20),(3,'2000-06-13 09:45:40',17,100),(4,'2003-03-22 14:27:28',5,30),(5,'2013-05-02 23:29:11',1,25),(6,'2021-02-22 19:07:46',16,26),(7,'1998-06-02 08:03:22',4,18),(8,'2010-03-31 09:02:20',9,89),(9,'2012-03-17 13:31:22',15,12),(10,'2016-12-11 15:54:59',14,42),(11,'2006-07-04 11:25:22',1,56),(12,'2010-03-18 20:16:22',12,31),(13,'2003-02-26 10:17:34',10,23),(14,'2009-09-08 12:06:45',9,42),(15,'2003-03-03 18:12:15',7,15);
+/*!40000 ALTER TABLE `dostavka` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `halls`
+-- Table structure for table `ingredient_has_postavki`
 --
 
-DROP TABLE IF EXISTS `halls`;
+DROP TABLE IF EXISTS `ingredient_has_postavki`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `halls` (
-                         `Hall_number` int NOT NULL,
-                         `Number_of_seats` int DEFAULT NULL,
-                         `Screen_format` varchar(45) DEFAULT NULL,
-                         PRIMARY KEY (`Hall_number`)
+CREATE TABLE `ingredient_has_postavki` (
+     `id` int NOT NULL AUTO_INCREMENT,
+     `id_ingredient` int NOT NULL,
+     `id_postavshik` int NOT NULL,
+     PRIMARY KEY (`id`),
+     KEY `id_ingredient` (`id_ingredient`),
+     KEY `id_postavshik` (`id_postavshik`),
+     CONSTRAINT `ingredient_has_postavki_ibfk_1` FOREIGN KEY (`id_ingredient`) REFERENCES `ingredient` (`id_ingredient`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+     CONSTRAINT `ingredient_has_postavki_ibfk_2` FOREIGN KEY (`id_postavshik`) REFERENCES `postavki` (`id_postavshik`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `halls`
+-- Dumping data for table `ingredient_has_postavki`
 --
 
-LOCK TABLES `halls` WRITE;
-/*!40000 ALTER TABLE `halls` DISABLE KEYS */;
-INSERT INTO `halls` VALUES (1,23,'Стандартный'),(2,17,'Широкоэкранный'),(3,37,'IMAX'),(4,34,'IMAX'),(5,56,'Стандартный'),(6,65,'Стандартный'),(7,32,'Стандартный'),(8,58,'IMAX'),(9,45,'3D-экран'),(10,43,'Широкоэкранный'),(11,44,'IMAX'),(12,47,'Широкоэкранный'),(13,23,'3D-экран'),(14,19,'Широкоэкранный'),(15,55,'Стандартный'),(16,65,'Стандартный'),(17,46,'IMAX'),(18,35,'Стандартный'),(19,46,'Широкоэкранный'),(20,28,'Широкоэкранный');
-/*!40000 ALTER TABLE `halls` ENABLE KEYS */;
+LOCK TABLES `ingredient_has_postavki` WRITE;
+/*!40000 ALTER TABLE `ingredient_has_postavki` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ingredient_has_postavki` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tickets`
+-- Table structure for table `menu`
 --
 
-DROP TABLE IF EXISTS `tickets`;
+DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tickets` (
-                           `Ticket_number` int NOT NULL,
-                           `Price` int DEFAULT NULL,
-                           PRIMARY KEY (`Ticket_number`)
+CREATE TABLE `menu` (
+     `id_dish` int NOT NULL AUTO_INCREMENT,
+     `name_dish` varchar(40) NOT NULL,
+     `cost_dish` decimal(6,0) DEFAULT NULL,
+     `stoplist` varchar(40) NOT NULL,
+     PRIMARY KEY (`id_dish`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `menu`
+--
+
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,'Хачапури по Аджарски',40,'Yes'),(2,'Сосиска в тесте',46,'No'),(3,'Шаурма со свининой',170,'Yes'),(4,'Шаурма с говядиной',200,'No'),(5,'Шаурма с курицей',180,'No'),(6,'Беляш',50,'No'),(7,'Самса с курицей',45,'No'),(8,'Самса с вишней',40,'Yes'),(9,'Кофе со сливками',36,'No'),(10,'Кофе с сахаром',31,'No'),(11,'Латте',41,'No'),(12,'Донер с курицей',190,'Yes'),(13,'Пирог с яблоками',20,'No'),(14,'Пирог с луком и яйцом',20,'No'),(15,'Чай',10,'No'),(16,'Кола со льдом',21,'No'),(17,'Шашлык свинина 100 грамм',70,'No'),(18,'Шашлык говядина 100 грамм',80,'No'),(19,'Шашлык курица 100 грамм',65,'No');
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `menu_has_dostavka`
+--
+
+DROP TABLE IF EXISTS `menu_has_dostavka`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `menu_has_dostavka` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `id_dish` int NOT NULL,
+    `id_dostavka` int NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `id_dish` (`id_dish`),
+    KEY `id_dostavka` (`id_dostavka`),
+    CONSTRAINT `menu_has_dostavka_ibfk_1` FOREIGN KEY (`id_dish`) REFERENCES `menu` (`id_dish`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    CONSTRAINT `menu_has_dostavka_ibfk_2` FOREIGN KEY (`id_dostavka`) REFERENCES `dostavka` (`id_dostavka`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tickets`
+-- Dumping data for table `menu_has_dostavka`
 --
 
-LOCK TABLES `tickets` WRITE;
-/*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets` VALUES (100,230),(101,340),(102,400),(103,320),(104,500),(105,260),(106,390),(107,470),(108,330),(109,560),(110,450),(111,380),(112,220),(113,550),(114,390),(115,290),(116,180),(117,380),(118,550),(119,230),(120,540),(121,276);
-/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
+LOCK TABLES `menu_has_dostavka` WRITE;
+/*!40000 ALTER TABLE `menu_has_dostavka` DISABLE KEYS */;
+/*!40000 ALTER TABLE `menu_has_dostavka` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `postavki`
+--
+
+DROP TABLE IF EXISTS `postavki`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `postavki` (
+    `id_postavshik` int NOT NULL AUTO_INCREMENT,
+    `name_postavshik` varchar(40) NOT NULL,
+    `data_time_postavka` datetime DEFAULT NULL,
+    `id_ingredient` int NOT NULL,
+    PRIMARY KEY (`id_postavshik`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `postavki`
+--
+
+LOCK TABLES `postavki` WRITE;
+/*!40000 ALTER TABLE `postavki` DISABLE KEYS */;
+INSERT INTO `postavki` VALUES (1,'Агзамов Ренат','2017-09-27 17:46:33',1),(2,'Ивлев Константин','2004-06-04 02:10:39',2),(3,'Агзамов Ренат','2010-07-23 19:55:14',3),(4,'Агзамов Ренат','2017-05-04 20:49:08',4),(5,'Левицкий Дмитрий','2010-06-28 19:45:18',5),(6,'Левицкий Дмитрий','2016-07-27 21:08:37',6),(7,'Левицкий Дмитрий','2004-05-27 01:31:32',7),(8,'Ивлев Константин','2000-07-26 06:54:16',8),(9,'Ивлев Константин','2021-10-24 19:08:37',9),(10,'Левицкий Дмитрий','2002-08-27 07:25:22',10),(11,'Агзамов Ренат','2006-03-20 04:51:22',11),(12,'Агзамов Ренат','2014-11-23 08:08:28',12),(13,'Агзамов Ренат','2016-02-12 05:29:45',13),(14,'Левицкий Дмитрий','2012-07-04 06:58:29',14),(15,'Левицкий Дмитрий','2014-02-06 19:04:23',15),(16,'Левицкий Дмитрий','2002-08-11 07:51:00',16),(17,'Ивлев Константин','2019-11-21 07:14:14',17),(18,'Левицкий Дмитрий','2007-10-12 05:07:59',18),(19,'Левицкий Дмитрий','2002-07-06 15:53:40',19),(20,'Агзамов Ренат','2021-07-22 04:38:54',20),(21,'Агзамов Ренат','2010-05-24 14:53:28',21);
+/*!40000 ALTER TABLE `postavki` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `povar`
+--
+
+DROP TABLE IF EXISTS `povar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `povar` (
+    `id_povar` int NOT NULL AUTO_INCREMENT,
+    `fio_povar` varchar(100) NOT NULL,
+    `id_dish` int NOT NULL,
+    `zarplata` decimal(6,0) NOT NULL,
+    `id_ingredient` int NOT NULL,
+    PRIMARY KEY (`id_povar`),
+    KEY `povar_FK` (`id_dish`),
+    CONSTRAINT `povar_FK` FOREIGN KEY (`id_dish`) REFERENCES `menu` (`id_dish`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `povar`
+--
+
+LOCK TABLES `povar` WRITE;
+/*!40000 ALTER TABLE `povar` DISABLE KEYS */;
+INSERT INTO `povar` VALUES (1,'Петров Артём',1,12900,1),(2,'Петров Артём',2,45000,2),(3,'Рахматов Саид',3,4500,3),(4,'Олимов Равшан',4,6790,4),(5,'Соломонов Давид',5,67900,5),(6,'Лесова Лариса',6,38723,6),(7,'Лесова Лариса',7,42141,7),(8,'Олимов Равшан',8,3134,8),(9,'Петров Артём',9,13113,9),(10,'Рахматов Саид',10,34131,10),(11,'Лесова Лариса',11,8762,11),(12,'Рахматов Саид',12,7342,12),(13,'Олимов Равшан',13,26173,13),(14,'Олимов Равшан',14,13431,14),(15,'Соломонов Давид',15,32614,15);
+/*!40000 ALTER TABLE `povar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `povar_has_ingredient`
+--
+
+DROP TABLE IF EXISTS `povar_has_ingredient`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `povar_has_ingredient` (
+     `id` int NOT NULL AUTO_INCREMENT,
+     `id_povar` int NOT NULL,
+     `id_ingredient` int NOT NULL,
+     PRIMARY KEY (`id`),
+     KEY `id_povar` (`id_povar`),
+     KEY `id_ingredient` (`id_ingredient`),
+     CONSTRAINT `povar_has_ingredient_ibfk_1` FOREIGN KEY (`id_povar`) REFERENCES `povar` (`id_povar`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+     CONSTRAINT `povar_has_ingredient_ibfk_2` FOREIGN KEY (`id_ingredient`) REFERENCES `ingredient` (`id_ingredient`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `povar_has_ingredient`
+--
+
+LOCK TABLES `povar_has_ingredient` WRITE;
+/*!40000 ALTER TABLE `povar_has_ingredient` DISABLE KEYS */;
+/*!40000 ALTER TABLE `povar_has_ingredient` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -129,9 +243,9 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-                         `name` varchar(40) NOT NULL,
-                         `pass` varchar(45) DEFAULT NULL,
-                         PRIMARY KEY (`name`)
+      `name` varchar(40) NOT NULL,
+      `pass` varchar(40) DEFAULT NULL,
+      PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -141,126 +255,66 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('root','12345678'),('rot','1234');
+INSERT INTO `users` VALUES ('root','Chudnenko357');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `visitors`
+-- Table structure for table `zakaz`
 --
 
-DROP TABLE IF EXISTS `visitors`;
+DROP TABLE IF EXISTS `zakaz`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `visitors` (
-                            `Visitor_s_number` int NOT NULL,
-                            `Surname` varchar(45) DEFAULT NULL,
-                            `Name` varchar(45) DEFAULT NULL,
-                            `Middle_name` varchar(45) DEFAULT NULL,
-                            `Phone_number` varchar(15) DEFAULT NULL,
-                            `Ticket_number` int NOT NULL,
-                            PRIMARY KEY (`Visitor_s_number`),
-                            KEY `fk_Visitors_Tickets1_idx` (`Ticket_number`),
-                            CONSTRAINT `fk_Visitors_Tickets1` FOREIGN KEY (`Ticket_number`) REFERENCES `tickets` (`Ticket_number`)
+CREATE TABLE `zakaz` (
+     `id_zakaz` int NOT NULL AUTO_INCREMENT,
+     `id_pokupatel` int NOT NULL,
+     `name_pokupatel` varchar(40) NOT NULL,
+     `id_dish` int NOT NULL,
+     `data_time_zakaz` datetime DEFAULT NULL,
+     PRIMARY KEY (`id_zakaz`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `zakaz`
+--
+
+LOCK TABLES `zakaz` WRITE;
+/*!40000 ALTER TABLE `zakaz` DISABLE KEYS */;
+INSERT INTO `zakaz` VALUES (1,1,'Дэвид Блэк',1,'2023-03-09 13:30:56'),(2,2,'Джейсон Стетхем',2,'2019-06-02 15:55:20'),(3,3,'Дженсен Эклз',3,'2011-05-22 08:32:58'),(4,4,'Марго Робби',4,'2009-08-28 17:22:22'),(5,5,'Иванов Иван',5,'2020-07-27 13:13:19'),(6,6,'Сидоров Сидор',6,'2022-01-28 03:39:05'),(7,7,'Землянинова Мария',7,'2010-12-06 10:54:24'),(8,8,'Автомобилёв Владимир',8,'2019-12-02 08:22:59'),(9,9,'Орлова Оксана',9,'2013-10-07 08:39:05'),(10,10,'Панюшкин Артём',10,'2012-07-17 14:27:58'),(11,11,'Шрамов Шурик',11,'2005-06-01 02:23:55'),(12,12,'Балбесова Агафья',12,'2015-11-16 14:12:48'),(13,13,'Есенин Роман',13,'2003-06-27 04:51:29'),(14,14,'Александров Александр',14,'2009-02-13 06:10:31'),(15,15,'Обедов Василий',15,'2005-08-16 22:49:51'),(16,16,'Дин Винчестер',16,'2023-03-09 13:30:56'),(17,17,'Дженсен Эклз',17,'2021-03-19 14:10:03');
+/*!40000 ALTER TABLE `zakaz` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `zakaz_has_menu`
+--
+
+DROP TABLE IF EXISTS `zakaz_has_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `zakaz_has_menu` (
+     `id` int NOT NULL AUTO_INCREMENT,
+     `id_dish` int NOT NULL,
+     `id_zakaz` int NOT NULL,
+     PRIMARY KEY (`id`),
+     KEY `id_dish` (`id_dish`),
+     KEY `id_zakaz` (`id_zakaz`),
+     CONSTRAINT `zakaz_has_menu_ibfk_1` FOREIGN KEY (`id_dish`) REFERENCES `menu` (`id_dish`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+     CONSTRAINT `zakaz_has_menu_ibfk_2` FOREIGN KEY (`id_zakaz`) REFERENCES `zakaz` (`id_zakaz`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `visitors`
+-- Dumping data for table `zakaz_has_menu`
 --
 
-LOCK TABLES `visitors` WRITE;
-/*!40000 ALTER TABLE `visitors` DISABLE KEYS */;
-INSERT INTO `visitors` VALUES (1,'Кудрявцев','Олег','Юрьевич','+78760984567',109),(2,'Ширяев','Юрий','Алексеевич','+76734876567',100),(3,'Дмитриева','Надежда','Павловна','+73286756385',114),(4,'Федотов','Кирилл','Петрович','+78349756676',112),(5,'Воронов','Игорь','Олегович','+73286756327',108),(6,'Нестеров','Евгений','Валентинович','+72386763455',105),(7,'Гордеева','Карина','Алексеевна','+75326237563',104),(8,'Сидоров','Владимир','Александрович','+73652623465',102),(9,'Семёнов','Борис','Егорович','+76234452563',118),(10,'Третьяков','Артём','Борисович','+71342134555',115),(11,'Лапина','Анастасия','Николаевна','+73422222545',102),(12,'Якушев','Александр','Валерьевич','+70289328787',107),(13,'Морозов','Алексей','Олегович','+79038732465',117),(14,'Поляков','Валентин','Юрьевич','+70349587578',103),(15,'Аксёнов','Валерий','Валентинович','+72364365563',106),(16,'Горбачёв','Егор','Егорович','+72374367646',115),(17,'Авдеева','Мария','Александровна','+71453123546',118),(18,'Власов','Павел','Олегович','+72156353245',120),(19,'Соколов','Пётр','Николаевич','+76235437234',116),(20,'Тихонов','Николай','Борисович','+71324324356',101);
-/*!40000 ALTER TABLE `visitors` ENABLE KEYS */;
+LOCK TABLES `zakaz_has_menu` WRITE;
+/*!40000 ALTER TABLE `zakaz_has_menu` DISABLE KEYS */;
+/*!40000 ALTER TABLE `zakaz_has_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `visitors_has_films`
---
 
-DROP TABLE IF EXISTS `visitors_has_films`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `visitors_has_films` (
-                                      `Visitor_s_number` int NOT NULL,
-                                      `Film_number` int NOT NULL,
-                                      PRIMARY KEY (`Visitor_s_number`,`Film_number`),
-                                      KEY `fk_Visitors_has_Films_Films1_idx` (`Film_number`),
-                                      KEY `fk_Visitors_has_Films_Visitors1_idx` (`Visitor_s_number`),
-                                      CONSTRAINT `fk_Visitors_has_Films_Films1` FOREIGN KEY (`Film_number`) REFERENCES `films` (`Film_number`),
-                                      CONSTRAINT `fk_Visitors_has_Films_Visitors1` FOREIGN KEY (`Visitor_s_number`) REFERENCES `visitors` (`Visitor_s_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `visitors_has_films`
---
-
-LOCK TABLES `visitors_has_films` WRITE;
-/*!40000 ALTER TABLE `visitors_has_films` DISABLE KEYS */;
-INSERT INTO `visitors_has_films` VALUES (14,2),(1,3),(7,3),(17,3),(3,4),(1,5),(13,5),(1,7),(19,7),(14,9),(11,11),(12,14),(3,15),(16,15),(18,16),(9,17),(9,18),(9,19),(8,20);
-/*!40000 ALTER TABLE `visitors_has_films` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `workers`
---
-
-DROP TABLE IF EXISTS `workers`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `workers` (
-                           `Kod_workers` int NOT NULL,
-                           `Surname` varchar(45) DEFAULT NULL,
-                           `Name` varchar(45) DEFAULT NULL,
-                           `Middle_name` varchar(45) DEFAULT NULL,
-                           `Post` varchar(45) DEFAULT NULL,
-                           `Phone_number` varchar(15) DEFAULT NULL,
-                           `Adress` varchar(50) DEFAULT NULL,
-                           `Passport_series` int DEFAULT NULL,
-                           `Passport_number` int DEFAULT NULL,
-                           PRIMARY KEY (`Kod_workers`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `workers`
---
-
-LOCK TABLES `workers` WRITE;
-/*!40000 ALTER TABLE `workers` DISABLE KEYS */;
-INSERT INTO `workers` VALUES (10576,'Антонов','Валентин','Павлович','Уборщик','+76546788990','Н.Новгород, ул. Бекетова, д. 9, к. 34',2218,786543),(11564,'Третьякова','Галина','Всеволодович','Кассир','+78764352134','Кстово, ул. Берёзовая, д. 3, к. 32',2246,980765),(12768,'Данилова','Евгения','Данилович','Охранник','+79087635468','Н.Новгород, ул. Нартова, д. 16, к. 109',2367,122345),(13466,'Лебедев','Георгий','Евгеньевич','Бухгалтер','+78765432309','Княгинино, ул. Урицкого, д. 29, к. 204',2135,234354),(14465,'Максимов','Кирилл','Семёнович','Администратор','+78764535789','Бор, ул. Ленина, д. 3, к. 309',2478,879545),(15254,'Лавров','Константин','Максимович','Контролёр','+76566889642','Дзержинск, ул. Чапаева, д. 45, к. 50',2355,987755),(15673,'Абалаков','Павел','Захарович','Киномеханик','+74565678329','Дзержинск, ул. Матросова, д. 6, к. 38',2256,211253),(16098,'Кошелева','Надежда','Павлович','Кассир','+71223344354','Н.Новгород, ул. Бекетова, д. 7, к. 15',2365,766545),(17575,'Шарова','Полина','Валентинович','Охранник','+78976553244','Княгинино, ул. Урицкого, д. 56, к. 20',2133,123234),(18478,'Ершов','Роман','Евгеньевич','Охранник','+71244573890','Кстово, ул. Герцена, д. 78, к. 49',2488,909877),(19767,'Маслов','Сергей','Артёмович','Кассир','+76878909634','Кстово, ул. Зелёная, д. 89, к. 100',2899,564544),(20664,'Евсеев','Семён','Павлович','Кассир','+73122233445','Москва, ул. Ленина, д. 77, к. 129',2468,979655),(24676,'Смирнов','Руслан','Константинович','Администратор','+75333456800','Н.Новгород, ул. Ванеева, д. 33, к. 150',2890,454765),(33256,'Карпов','Михаил','Кириллович','Киномеханик','+79643232540','Н.Новгород, ул. Головнина, д. 90, к. 3',2237,224366),(46589,'Гуляева','Дарья','Петрович','Охранник','+73645245767','Дзержинск, ул. Чапаева, д. 4, к. 128',2134,876756),(57532,'Турова','Валерия','Николаевич','Контролёр','+72343524155','Княгинино, ул. Урицкого, д. 7, к. 38',2893,122353),(68009,'Мельников','Всеволод','Игоревич','Кассир','+70694585656','Н.Новгород, ул. Нартова, д. 8, к. 57',2245,567889),(75654,'Сорокин','Даниил','Руслонович','Киномеханик','+73435458738','Дзержинск, ул. Пирогова, д. 47, к. 12',2177,675656),(84356,'Макаров','Максим','Борисович','Охранник','+71224435665','Дзержинск, ул. Строителей, д. 68, к. 28',2276,766567),(94535,'Яковлев','Игорь','Сергеевич','Кассир','+78435093465','Н.Новгород, ул. Заярская, д. 87, к. 43',2166,975544),(95898,'Иванов','Владимир','Романович','Уборщик','+78563435677','Н.Новгород, ул. Горловская, д. 58, к. 97',2290,378945);
-/*!40000 ALTER TABLE `workers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `workers_has_halls`
---
-
-DROP TABLE IF EXISTS `workers_has_halls`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `workers_has_halls` (
-                                     `Kod_workers` int NOT NULL,
-                                     `Hall_number` int NOT NULL,
-                                     PRIMARY KEY (`Kod_workers`,`Hall_number`),
-                                     KEY `fk_Workers_has_Halls_Halls1_idx` (`Hall_number`),
-                                     KEY `fk_Workers_has_Halls_Workers1_idx` (`Kod_workers`),
-                                     CONSTRAINT `fk_Workers_has_Halls_Halls1` FOREIGN KEY (`Hall_number`) REFERENCES `halls` (`Hall_number`),
-                                     CONSTRAINT `fk_Workers_has_Halls_Workers1` FOREIGN KEY (`Kod_workers`) REFERENCES `workers` (`Kod_workers`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `workers_has_halls`
---
-
-LOCK TABLES `workers_has_halls` WRITE;
-/*!40000 ALTER TABLE `workers_has_halls` DISABLE KEYS */;
-INSERT INTO `workers_has_halls` VALUES (10576,1),(10576,3),(10576,5),(33256,5),(10576,7),(10576,8),(15254,8),(15673,8),(33256,9),(33256,11),(57532,12),(57532,13),(15673,15),(57532,16),(10576,18),(15673,19),(15254,20);
-/*!40000 ALTER TABLE `workers_has_halls` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
